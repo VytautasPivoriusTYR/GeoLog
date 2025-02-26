@@ -1,0 +1,46 @@
+﻿<Page x:Class="GeoLog.Views.Pages.BoreholePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GeoLog.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Borehole Page">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="13*"/>
+            <RowDefinition Height="77*"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
+            <DockPanel>
+                <ui:Button x:Name="buttonUpdateBoreholeLayer" Width="120" Margin="5,0,0,0" Appearance="Caution" VerticalAlignment="Center">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="EditSettings20" />
+                    </ui:Button.Icon>
+                    Atnaujinti
+                </ui:Button>
+
+            </DockPanel>
+        </StackPanel>
+
+        <ui:NavigationView Grid.Row="1"
+x:Name="LayersNavigation"
+Padding="42,0,42,0"
+BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
+FooterMenuItemsSource="{Binding FooterMenuItems, Mode=OneWay}"
+FrameMargin="0"
+IsPaneToggleVisible="False"
+IsBackButtonVisible="Collapsed"
+MenuItemsSource="{Binding MenuItems, Mode=OneWay}"
+OpenPaneLength="100"
+PaneDisplayMode="Left">
+            <ui:NavigationView.Header>
+                <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
+            </ui:NavigationView.Header>
+        </ui:NavigationView>
+    </Grid>
+</Page>

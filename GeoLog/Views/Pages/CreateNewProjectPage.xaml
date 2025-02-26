@@ -1,0 +1,25 @@
+﻿<Page x:Class="GeoLog.Views.Pages.CreateNewProjectPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:GeoLog.Views.Pages"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="CreateNewProjectPage">
+
+    <Grid>
+        <StackPanel>
+            <DockPanel Margin="0,10,0,5">
+                <ui:TextBox x:Name="textBoxProjectName" PlaceholderText="Projekto pavadinimas"></ui:TextBox>
+            </DockPanel>
+            <DockPanel Margin="0,5,0,10">
+                <ui:TextBox x:Name="textBoxProjectDescription" PlaceholderText="Projekto aprašymas"></ui:TextBox>
+            </DockPanel>
+            <DockPanel>
+                <ui:Button Appearance="Caution" HorizontalAlignment="Center" x:Name="buttonCreateProject" Click="buttonCreateProject_Click">Sukurti</ui:Button>
+            </DockPanel>
+        </StackPanel>
+    </Grid>
+</Page>
