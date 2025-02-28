@@ -10,37 +10,62 @@
       Title="Borehole Page">
 
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="39*"/>
+            <ColumnDefinition Width="161*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="13*"/>
             <RowDefinition Height="77*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.ColumnSpan="2" Grid.RowSpan="2">
-            <DockPanel>
-                <ui:Button x:Name="buttonUpdateBoreholeLayer" Width="120" Margin="5,0,0,0" Appearance="Caution" VerticalAlignment="Center">
-                    <ui:Button.Icon>
-                        <ui:SymbolIcon Symbol="EditSettings20" />
-                    </ui:Button.Icon>
-                    Atnaujinti
-                </ui:Button>
+        <!-- Navigation Panel -->
+        <StackPanel Grid.Column="0" Grid.RowSpan="2" Background="{DynamicResource SecondBackground}">
+            <TextBlock Text="Sluoksniai" FontSize="16" FontWeight="Bold" Margin="10"/>
+            <ListBox x:Name="BoreholeList" Margin="10" SelectionChanged="BoreholeList_SelectionChanged"/>
+        </StackPanel>
+        
+        <StackPanel Grid.Column="1" Grid.Row="1">
+            <GroupBox Margin="0,5,0,0" Height="120" Style="{DynamicResource GroupBoxStyle}" HorizontalContentAlignment="Left" Header="Grunto aprašymas">
+                <ui:RichTextBox></ui:RichTextBox>
+            </GroupBox>
 
+            <GroupBox Margin="0,5,0,0" Style="{DynamicResource GroupBoxStyle}" Header="Sluoksnio storis (m)">
+                <ui:NumberBox MaxDecimalPlaces="2" SmallChange="0.1" LargeChange="1"></ui:NumberBox>
+            </GroupBox>
+
+            <GroupBox Margin="0,5,0,0" Style="{DynamicResource GroupBoxStyle}" Header="Sluoksnio pado gylis (m)">
+                <ui:NumberBox></ui:NumberBox>
+            </GroupBox>
+
+            <DockPanel HorizontalAlignment="Center" Margin="0,5,0,0">
+                <ui:Button Appearance="Caution" Margin="0,0,5,0" Width="110" Click="buttonCreate">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="New24" />
+                    </ui:Button.Icon>
+                    Sukurti
+                </ui:Button>
+                
+                <ui:Button Appearance="Transparent" Margin="0,0,5,0" Width="110" Click="buttonCreate">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="DocumentCopy48" />
+                    </ui:Button.Icon>
+                    Dubliuoti
+                </ui:Button>
+                
+                <ui:Button Appearance="Danger" Width="110" Click="buttonDelete">
+                    <ui:Button.Icon>
+                        <ui:SymbolIcon Symbol="Delete48" />
+                    </ui:Button.Icon>
+                    Ištrinti
+                </ui:Button>
+                
             </DockPanel>
+
+
         </StackPanel>
 
-        <ui:NavigationView Grid.Row="1"
-x:Name="LayersNavigation"
-Padding="42,0,42,0"
-BreadcrumbBar="{Binding ElementName=BreadcrumbBar}"
-FooterMenuItemsSource="{Binding FooterMenuItems, Mode=OneWay}"
-FrameMargin="0"
-IsPaneToggleVisible="False"
-IsBackButtonVisible="Collapsed"
-MenuItemsSource="{Binding MenuItems, Mode=OneWay}"
-OpenPaneLength="100"
-PaneDisplayMode="Left">
-            <ui:NavigationView.Header>
-                <ui:BreadcrumbBar x:Name="BreadcrumbBar" Margin="42,32,42,20" />
-            </ui:NavigationView.Header>
-        </ui:NavigationView>
+
+
     </Grid>
 </Page>

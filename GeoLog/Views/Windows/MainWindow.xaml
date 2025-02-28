@@ -42,7 +42,7 @@
             <ui:Button Appearance="Caution" Command="{Binding ViewModel.CreateNewProjectCommand}" Margin="10,0,0,0">
                 <StackPanel Orientation="Horizontal">
                     <ui:SymbolIcon Symbol="FolderAdd16" Margin="0,0,5,0"/>
-                    <TextBlock Text="Sukurti"/>
+                    <TextBlock Text="Sukurti projektą"/>
                 </StackPanel>
             </ui:Button>
             

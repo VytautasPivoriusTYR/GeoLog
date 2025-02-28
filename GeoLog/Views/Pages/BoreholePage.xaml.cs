@@ -1,6 +1,8 @@
-﻿using GeoLog.ViewModels.Pages;
+﻿using GeoLog.Models;
+using GeoLog.ViewModels.Pages;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -29,6 +31,8 @@ namespace GeoLog.Views.Pages
 
         private readonly INavigationService _navigationService;
 
+        private ObservableCollection<string> Layers { get; set; } = new ObservableCollection<string>();
+
         public BoreholePage(BoreholePageViewModel viewModel, INavigationService navigationService)
         {
             InitializeComponent(); // Ensure XAML elements are loaded first
@@ -37,10 +41,34 @@ namespace GeoLog.Views.Pages
             DataContext = ViewModel;
 
             _navigationService = navigationService;
+            BoreholeList.ItemsSource = Layers;
+        }
+
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            BoreholeList.ItemsSource = Layers;
         }
 
 
 
+       
 
+        private void BoreholeList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+        }
+
+        private void buttonCreate(object sender, RoutedEventArgs e)
+        {
+           
+        }
+
+        private void buttonDelete(object sender, RoutedEventArgs e)
+        {
+            if (BoreholeList.SelectedItem is string selectedItem)
+            {
+                Layers.Remove(selectedItem);
+            }
+        }
     }
 }

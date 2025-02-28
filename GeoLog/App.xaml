@@ -41,7 +41,7 @@
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="Auto"/>
                                     <RowDefinition Height="*"/>
-                                    <RowDefinition Height="5"/>
+                                    <RowDefinition Height="7"/>
                                 </Grid.RowDefinitions>
                                 <Border CornerRadius="4"
                Grid.Row="1"
