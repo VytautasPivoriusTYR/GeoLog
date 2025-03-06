@@ -69,6 +69,27 @@ namespace GeoLog.Services
             SaveToDatabase(ProjectData.CurrentProject.Name, ProjectData.CurrentProject);
         }
 
+        public void AddBoreholeLayerToProject(BoreholeLayer boreholeLayer)
+        {
+
+            if (ProjectData.CurrentBorehole == null)
+            {
+                MessageBox.Show("Grežinys nepasirinktas");
+                return;
+            }
+
+            if(boreholeLayer == null)
+            {
+                MessageBox.Show("Duomenys nesuvesti");
+                return;
+            }
+
+            ProjectData.CurrentProject.Boreholes.FirstOrDefault(x=>x.Guid == ProjectData.CurrentBorehole.Guid).Layers.Add(boreholeLayer);
+
+
+            SaveToDatabase(ProjectData.CurrentProject.Name, ProjectData.CurrentProject);
+        }
+
         public void UpdateBoreholeToProject(string oldBoreholeName, string newBoreholeName)
         {
             var boreholeOld = ProjectData.CurrentProject.Boreholes.FirstOrDefault(x => x.Name == oldBoreholeName);

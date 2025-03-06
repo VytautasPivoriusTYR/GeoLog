@@ -59,6 +59,8 @@ namespace GeoLog
                 services.AddSingleton<BoreholePageViewModel>();
                 services.AddSingleton<CreateNewBorehole>();
                 services.AddSingleton<FileService>();
+                services.AddSingleton<CreateNewLayerPage>();
+
             }).Build();
 
         /// <summary>

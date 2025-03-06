@@ -2,6 +2,7 @@
 {
     public class Borehole
     {
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         public double X { get; set; }
         public double Y { get; set; }
@@ -11,6 +12,7 @@
         public Borehole(string name)
         {
             Name = name;
+            Guid = Guid.NewGuid();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using GeoLog.Models;
 using GeoLog.Services;
 using GeoLog.Services.Interfaces;
+using GeoLog.ViewModels.Pages;
 using GeoLog.Views.Pages;
 using System.Collections.ObjectModel;
 using Wpf.Ui;
@@ -135,12 +136,87 @@ namespace GeoLog.ViewModels.Windows
 
             foreach (var borehole in project.Boreholes)
             {
-                var boreholeItem = new NavigationViewItem
+
+                var boreholeItem = new NavigationViewItem()
                 {
                     Content = borehole.Name,
-                    TargetPageType = typeof(BoreholePage)
+                    TargetPageType = typeof(BoreholePage),
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.Circle12 },
                 };
+
+                boreholeItem.Click += (_, _) =>
+                {
+                    ProjectData.CurrentBorehole = borehole;
+                    //_navigationService.Navigate(typeof(BoreholePage));
+                };
+
+                if (borehole.Layers.Any())
+                {
+                    foreach (var layer in borehole.Layers)
+                    {
+                        var layerItem = new NavigationViewItem()
+                        {
+                            Content = layer.Description,
+                            Icon = new SymbolIcon { Symbol = SymbolRegular.Layer20 }, // Layer icon
+                            TargetPageType = typeof(CreateNewLayerPage),
+                        };
+
+                        layerItem.Click += (_, _) =>
+                        {
+                            ProjectData.CurrentBoreholeLayer = layer;
+                        };
+
+                        boreholeItem.MenuItems.Add(layerItem);
+                    }
+                }
+
                 _boreholesMenu.MenuItems.Add(boreholeItem);
+            }
+        }
+
+        public void LoadBoreholesDropDown(Project project)
+        {
+            _menuItems.Clear();
+
+            foreach (var borehole in project.Boreholes)
+            {
+                var boreholeItem = new NavigationViewItem()
+                {
+                    Content = borehole.Name,
+                    TargetPageType = typeof(BoreholePage),
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.DataArea20 },
+
+                };
+
+                boreholeItem.Click += (_, _) =>
+                {
+                    ProjectData.CurrentBorehole = borehole;
+                    //_navigationService.Navigate(typeof(BoreholePage));
+                };
+
+                // Ensure layers are visible under the borehole
+                if (borehole.Layers.Any())
+                {
+                    foreach (var layer in borehole.Layers)
+                    {
+                        var layerItem = new NavigationViewItem()
+                        {
+                            Content = layer.Description,
+                            Icon = new SymbolIcon { Symbol = SymbolRegular.Layer20 }, // Layer icon
+                            TargetPageType = typeof(CreateNewLayerPage),
+                        };
+
+                        layerItem.Click += (_, _) =>
+                        {
+                            ProjectData.CurrentBoreholeLayer = layer;
+                        };
+                        ((ObservableCollection<object>)boreholeItem.MenuItems).Add(layerItem);
+
+                        boreholeItem.MenuItems.Add(layerItem);
+                    }
+                }
+
+                _menuItems.Add(boreholeItem);
 
             }
         }

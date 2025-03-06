@@ -14,6 +14,7 @@ namespace GeoLog.Services.Interfaces
         void UpdateBoreholeToProject(string oldBoreholeName, string newBoreholeName);
         void CreateJsonFile(string directoryPath, string fileName, object jsonContent);
         List<T> ReadAllJsonFiles<T>(string directoryPath);
+        void AddBoreholeLayerToProject(BoreholeLayer boreholeLayer);
 
     }
 }

@@ -1,53 +1,65 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GeoLog.Models;
+using GeoLog.Views.Pages;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Wpf.Ui;
 using Wpf.Ui.Controls;
 
 namespace GeoLog.ViewModels.Pages
 {
     public partial class BoreholePageViewModel : ObservableObject
     {
-        private readonly INavigationService _navigationService;
+        [ObservableProperty]
+        private NavigationViewItem _layersMenu;
 
         [ObservableProperty]
-        private ObservableCollection<object> _menuItems = new()
-        {
-            new NavigationViewItem()
-            {
-                Content = "Layer 1",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Layer24 },
-                TargetPageType = typeof(Views.Pages.HomePage)
-            },
-            new NavigationViewItem()
-            {
-                Content = "Layer 2",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Layer24 },
-                TargetPageType = typeof(Views.Pages.HomePage)
-            }
-        };
+        private ObservableCollection<object> _menuItems = new();
 
         [ObservableProperty]
-        private ObservableCollection<object> _footerMenuItems = new()
+        private ObservableCollection<object> _footerMenuItems = new();
+
+        public BoreholePageViewModel()
         {
-            new NavigationViewItem()
-            {
-                Content = "Add New Layer",
-                Icon = new SymbolIcon { Symbol = SymbolRegular.Add24 },
-                TargetPageType = typeof(Views.Pages.HomePage)
-            }
-        };
-        public BoreholePageViewModel(INavigationService navigationService)
-        {
-            _navigationService = navigationService;
+            InitializeMenuItems();
         }
 
-        public void NavigateTo(Type pageType)
+        private void InitializeMenuItems()
         {
-            _navigationService.Navigate(pageType);
+            _footerMenuItems = new ObservableCollection<object>
+            {
+                new NavigationViewItem()
+                {
+                    Content = "Pridėti sluoksnį",
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.Add24 },
+                    TargetPageType = typeof(CreateNewLayerPage)
+                },
+            };
+        }
+
+        public void LoadBoreholeLayers()
+        {
+            _menuItems.Clear();
+
+            if (ProjectData.CurrentBorehole == null || ProjectData.CurrentBorehole.Layers == null)
+            {
+                return;
+            }
+
+            foreach (var layer in ProjectData.CurrentBorehole.Layers)
+            {
+                var item = new NavigationViewItem
+                {
+                    Content = layer.Thickness.ToString(),
+                    TargetPageType = typeof(CreateNewLayerPage),
+                    Icon = new SymbolIcon { Symbol = SymbolRegular.Layer20 },
+                };
+
+                item.Click += (_, _) =>
+                {
+                    ProjectData.CurrentBoreholeLayer = layer;
+                };
+
+                _menuItems.Add(item);
+
+            }
         }
 
     }

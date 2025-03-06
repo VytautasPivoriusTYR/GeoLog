@@ -2,14 +2,14 @@
 {
     public class Project
     {
-        public Guid Id { get; set; }
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public List<Borehole> Boreholes { get; set; } = new List<Borehole>();
 
         public Project(string name, string description)
         {
-            Id = Guid.NewGuid();
+            Guid = Guid.NewGuid();
             Name = name;
             Description = description;
         }

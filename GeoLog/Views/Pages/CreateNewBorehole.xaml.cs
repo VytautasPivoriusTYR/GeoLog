@@ -29,7 +29,6 @@ namespace GeoLog.Views.Pages
             _projectService.AddBoreholeToProject(BoreholeNumber);
 
             _mainWindowViewModel.LoadBoreholes(ProjectData.CurrentProject);
-
         }
 
         private void buttonBack_Click(object sender, RoutedEventArgs e)
